@@ -1,6 +1,6 @@
 Challenges:
-- dreamhack fl and ag
-- blahajctf 2024 long2bytes
+- Dreamhack fl and ag
+- BlahajCTF 2024 long2bytes
 
 Let's say you have $x = \frac{u}{v}$ where $u$ and $v$ are integers, and $x$ is a real number.
 
@@ -63,4 +63,4 @@ print(y.rational_reconstruction())
 # Prints 8/7
 ```
 
-However, this only gives a unique reconstruction if works when $u * v ^ {-1} < \frac{N}{2}$.
+However, this only gives a unique reconstruction if works when $u * v ^ {-1} < \frac{N}{2}$. If this condition isn't met, you can try [[LLL Notes|LLL]] to recover the terms!
