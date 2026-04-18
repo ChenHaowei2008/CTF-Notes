@@ -10,3 +10,4 @@ I have very bad memory
 	- How the heap adjusts to increases size
 	- How chunk trimming works
 	- Deallocating
+- Musl exit handlers

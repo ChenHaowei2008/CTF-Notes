@@ -14,7 +14,7 @@ We can use
 %OptimizeFunctionOnNextCall(fn);
 ```
 
-To force optimisation, and use `%GetOptimizationStatus(fn)` to see how its optimised. Taken from [here](https://gist.github.com/naugtur/4b03a9f9f72346a9f79d7969728a849f)
+To force optimisation, and use `%GetOptimizationStatus(fn)` to see how its optimised. Taken from [here](https://gist.github.com/naugtur/4b03a9f9f72346a9f79d7969728a849f) (Likely outdated, should get a newer source)
 
 ```
 0 0 0 0 0 1 0 0 0 0 0 1
