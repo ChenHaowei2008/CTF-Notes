@@ -2,7 +2,7 @@ Challenges:
 - Dreamhack fl and ag
 
 This attack is when two messages are linearly related. Meaning if:
-$$M_1^e = C_1\ mod\ N$$ $$KM_1^e + r = C_2\ mod\ N$$
+$$M_1^e = C_1\ mod\ N$$ $$(KM_1 + r)^e = C_2\ mod\ N$$
 Then $M_1$ is recoverable.
 
 Sagemath code from [here](https://crypto.stackexchange.com/questions/30884/help-understanding-basic-franklin-reiter-related-message-attack).

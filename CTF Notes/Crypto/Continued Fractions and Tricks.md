@@ -49,7 +49,7 @@ If we give too many terms to the continued fraction, it will perfectly approxima
 
 In sagemath, we use the `continued_fraction(x, n_terms=n)` function. We can get the value by doing `continued_fraction(x, n_terms=n).value().numerator()` or `.denominator()`
 
-However, continued fractions aren't limited to real numbers. we can do `rational_reconstruction()` on integers in a group.
+However, continued fractions are limited to real numbers. we can do `rational_reconstruction()` on integers in a group.
 
 For example, if we know that $x = u * v^{-1}$, we can use the following piece of code:
 

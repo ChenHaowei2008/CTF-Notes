@@ -83,6 +83,6 @@ This is `0xe0000` on 32-bit and `0x1c0000` on 64-bit.
 
 It then uses `mmap` to allocate space for this chunk.
 
-In the other path, malloc computes the smallest acceptable bin for our size, by searching `mal.binmap` for a non-empty bin at or above that size. If it doesn't exist, the heap is grown with `brk`, or `mmap` if it fails. If it does exist, malloc takes a chunk from the smallest suitable non-empty bin. If the chosen chunk is larger than needed, it splits off the tail with `trin(c, n)`.
+In the other path, malloc computes the smallest acceptable bin for our size, by searching `mal.binmap` for a non-empty bin at or above that size. If it doesn't exist, the heap is grown with `brk`, or `mmap` if it fails. If it does exist, malloc takes a chunk from the smallest suitable non-empty bin. If the chosen chunk is larger than needed, it splits off the tail with `trim(c, n)`.
 
 These bins are **doubly linked-lists** that are unlinked when a chunk is requested, and linked when a chunk is freed.
